@@ -28,15 +28,24 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(view -> {
             ImageView imageView = (ImageView) findViewById(R.id.cameraman);
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-            Mat gray = new Mat();
-            Mat cannyMat = new Mat();
-            Utils.bitmapToMat(bitmap,gray);
-            Bitmap editedBitmap = Bitmap.createBitmap(bitmapDrawable.getBitmap().getWidth(), bitmapDrawable.getBitmap().getHeight(), Bitmap.Config.RGB_565);
-            Imgproc.Canny(gray, cannyMat, 50, 150);
-            Utils.matToBitmap(cannyMat, editedBitmap);
-            imageView.setImageBitmap(editedBitmap);
+            if (OpenCVLoader.initDebug()) {
+                Log.d("Loaded", "success");
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                Mat gray = new Mat();
+                Mat cannyMat = new Mat();
+                Utils.bitmapToMat(bitmap,gray);
+                Bitmap editedBitmap = Bitmap.createBitmap(bitmapDrawable.getBitmap().getWidth(), bitmapDrawable.getBitmap().getHeight(), Bitmap.Config.RGB_565);
+
+                Imgproc.Canny(gray, cannyMat, 50, 150);
+
+                Utils.matToBitmap(cannyMat, editedBitmap);
+
+                imageView.setImageBitmap(editedBitmap);
+            } else {
+                Log.d("Loaded", "error");
+            }
+
         });
 
 
