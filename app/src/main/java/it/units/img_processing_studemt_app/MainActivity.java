@@ -17,6 +17,7 @@ import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
+import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,9 +26,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = (Button) findViewById(R.id.button);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        Button button = findViewById(R.id.button);
         button.setOnClickListener(view -> {
-            ImageView imageView = (ImageView) findViewById(R.id.cameraman);
+            ImageView imageView = findViewById(R.id.cameraman);
             if (OpenCVLoader.initDebug()) {
                 Log.d("Loaded", "success");
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
