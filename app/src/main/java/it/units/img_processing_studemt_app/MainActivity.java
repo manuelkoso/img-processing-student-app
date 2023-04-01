@@ -19,6 +19,8 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import androidx.appcompat.widget.Toolbar;
 
+import it.units.img_processing_studemt_app.fragments.DescriptionFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DescriptionFragment descriptionFragment = (DescriptionFragment) getSupportFragmentManager().findFragmentById(R.id.desc);
+        descriptionFragment.setDescription("miao");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
